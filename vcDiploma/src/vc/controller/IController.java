@@ -13,5 +13,5 @@ public interface IController {
     public boolean validateImage(BufferedImage pic);
     public boolean saveImage(BufferedImage pic, String filename, int format);
     public BufferedImage loadImage(String filename);
-    public String decryptImage();
+    public BufferedImage decryptImage();
 }

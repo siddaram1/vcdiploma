@@ -1,15 +1,14 @@
 package vc.listener;
 
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import vc.api.VCAPI;
 import vc.controller.Controller;
 import vc.ui.VCFrame;
 
@@ -46,7 +45,8 @@ public class VCListener extends MouseAdapter implements  ActionListener{
   }
 //------------------------------------------------------------------------------
   void buttonProcess_mouseClicked(MouseEvent e) {
-    boolean success = controller.encrypt(path, called, frame.comboBox.getSelectedIndex());
+    //boolean success = controller.encrypt(path, called, frame.comboBox.getSelectedIndex());
+      boolean success = controller.encrypt(path, called, 1);
     if (success==true ) {
         Toolkit.getDefaultToolkit().beep();
     }
@@ -55,7 +55,15 @@ public class VCListener extends MouseAdapter implements  ActionListener{
   void showLayer(int layer){
       if(frame.check1.getState() && frame.check2.getState()){
           frame.result1.removeAll();
-          controller.decryptImage(); //расшифровать, сохранить и загрузить
+          frame.result1.updateUI();
+          BufferedImage out = controller.decryptImage(); //расшифровать, сохранить и загрузить
+          controller.saveImage(out, "decrypt", 1);
+          ImageIcon iconleft = new ImageIcon("./decrypt.gif");
+          JLabel label1 = new JLabel();
+          label1.setOpaque(true);
+          label1.setIcon(iconleft);
+          frame.result1.add(label1);
+          frame.result1.updateUI();
       }
       if ((layer == 1)&&(frame.check1.getState())){
           ImageIcon iconleft = new ImageIcon("./"+called+"_1.png");

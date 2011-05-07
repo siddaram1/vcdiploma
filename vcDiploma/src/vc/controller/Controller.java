@@ -42,8 +42,8 @@ public final class Controller implements IController{
         ui.setEncImage(encleft, encright);
     }
 
-    public String decryptImage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public BufferedImage decryptImage() {
+        return api.decryptImage();
     }
 
 }

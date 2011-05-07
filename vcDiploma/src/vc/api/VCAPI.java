@@ -12,8 +12,9 @@ import vc.controller.Controller;
  * @author Макс
  */
 public class VCAPI {
-    public static BufferedImage pic1;
-    public static BufferedImage pic2;
+    private static BufferedImage pic1;
+    private static BufferedImage pic2;
+    private static BufferedImage out;
 
   static int getBrightness(int rgb) {
     int r,g,b;
@@ -190,9 +191,17 @@ public class VCAPI {
             return name;
    }
 
-   public String decryptImage(){
-
-
-       
+   public BufferedImage decryptImage(){
+       out = new BufferedImage(pic1.getWidth(),pic1.getHeight(),BufferedImage.TYPE_INT_RGB);
+       for (int i=0;i<pic1.getHeight();i++){
+        for (int j=0;j<pic2.getWidth();j++) {
+            if ((pic1.getRGB(j,i)== -16777216)&&(pic2.getRGB(j,i) == -16777216))
+                out.setRGB((j),(i),-16777216);//black
+            else if (((pic1.getRGB(j,i)== -1)&&(pic2.getRGB(j,i) == -16777216))||((pic2.getRGB(j,i)== -1)&&(pic1.getRGB(j,i) == -16777216)))
+                out.setRGB((j),(i),-16777216);//black
+                else out.setRGB((j),(i),-1);//white
+      }
+    }
+       return out;
    }
 }
