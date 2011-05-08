@@ -28,7 +28,6 @@ public class VCFrame extends JFrame{
      public JPanel encleft = new JPanel();
      public JPanel encright = new JPanel();
      public JPanel result1 = new JPanel();
-     //public JPanel result2 = new JPanel();
      public TextField textField;
      public java.awt.Checkbox check1 = new java.awt.Checkbox();
      public java.awt.Checkbox check2 = new java.awt.Checkbox();
@@ -94,8 +93,6 @@ public class VCFrame extends JFrame{
     buttonOpen.setText("Открыть");
     buttonOpen.setToolTipText("Загрузить изображение");
     buttonOpen.setBorderPainted(true);
-    //buttonOpen.setIcon(new ImageIcon(new java.net.URL("file:G://open1.jpg")));
-    //buttonOpen.setRolloverIcon(new ImageIcon(new java.net.URL("file:G://open2.jpg")));
     buttonOpen.setRolloverEnabled(true);    
     buttonOpen.addMouseListener(new VCListener(this,"open"));
 
@@ -103,32 +100,32 @@ public class VCFrame extends JFrame{
     buttonProcess.setText("Шифровать");
     buttonProcess.setToolTipText("Сгенерировать изображния");
     buttonProcess.setBorderPainted(true);
-    //buttonProcess.setIcon(new ImageIcon(new java.net.URL("file:G://process1.jpg")));
-    //buttonProcess.setRolloverIcon(new ImageIcon(new java.net.URL("file:G://process2.jpg")));
     buttonProcess.addMouseListener(new VCListener(this, "process"));
 
     this.setMenuBar(menu);
 
     original.setBounds(new Rectangle(10, 70, 200, 200));
+    //original.addComponentListener(new VCListener(this, "origclick"));
     encleft.setBounds(new Rectangle(10, 280, 200, 200));
     encright.setBounds(new Rectangle(220, 280, 200, 200));
 
     result1.setBounds(new Rectangle(10, 510, 200, 200));
     result1.setOpaque(true);
-    //result2.setBounds(new Rectangle(10, 510, 200, 200));
-    //result2.setOpaque(true);
 
     textField = new TextField();
     textField.setBounds(new Rectangle(350,6,500,30));
     textField.setFont(new Font("sansserif", Font.BOLD, 14));
+    textField.setEnabled(false);
 
     check1.setBounds(new Rectangle(230, 510, 100, 10));
     check1.setLabel("Слой 1");
     check1.addMouseListener(new VCListener(this, "check1"));
+    check1.setEnabled(false);
 
     check2.setBounds(new Rectangle(230, 560, 100, 10));
     check2.setLabel("Слой 2");
     check2.addMouseListener(new VCListener(this, "check2"));
+    check2.setEnabled(false);
 
     contentPane.add(comboBox, null);
     contentPane.add(textField, null);
@@ -138,7 +135,6 @@ public class VCFrame extends JFrame{
     contentPane.add(encleft, null);
     contentPane.add(encright, null);
     contentPane.add(result1, null);
-    //contentPane.add(result2, null);
     contentPane.add(check1, null);
     contentPane.add(check2, null);
 
@@ -146,7 +142,7 @@ public class VCFrame extends JFrame{
     comboBox.insertItemAt(".png",0);
     comboBox.insertItemAt(".gif",1);
     comboBox.setSelectedIndex(0);
-    comboBox.setVisible(false);
+    //comboBox.setVisible(false);
   }
   //Overridden so we can exit when window is closed
   protected void processWindowEvent(WindowEvent e) {

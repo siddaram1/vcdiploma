@@ -1,5 +1,6 @@
 package vc.controller;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import vc.api.VCAPI;
 import vc.ui.UserInterface;
@@ -44,6 +45,10 @@ public final class Controller implements IController{
 
     public BufferedImage decryptImage() {
         return api.decryptImage();
+    }
+
+    public Dimension getFileSize(String path) {
+        return api.getFileSize(path);
     }
 
 }

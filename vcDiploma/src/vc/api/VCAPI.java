@@ -1,6 +1,7 @@
 package vc.api;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
@@ -203,5 +204,12 @@ public class VCAPI {
       }
     }
        return out;
+   }
+
+   public Dimension getFileSize(String path){
+       BufferedImage bi = loadImage(path);
+       Dimension size = new Dimension();
+       size.setSize(bi.getWidth(), bi.getHeight());
+       return size;
    }
 }

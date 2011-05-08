@@ -33,10 +33,8 @@ public class UserInterface implements IUserInterfase{
       frameSize.width = screenSize.width;
     }
     frame.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-    frame.validate();
-    frame.repaint();
     frame.setVisible(true);
-    
+    frame.validate();
     }
 
 //------------------------------------------------------------------------------
@@ -53,4 +51,5 @@ public class UserInterface implements IUserInterfase{
         frame.encright.add(label2);
         frame.encright.updateUI();
     }
+
 }

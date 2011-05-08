@@ -1,5 +1,6 @@
 package vc.controller;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,4 +15,5 @@ public interface IController {
     public boolean saveImage(BufferedImage pic, String filename, int format);
     public BufferedImage loadImage(String filename);
     public BufferedImage decryptImage();
+    public Dimension getFileSize(String path);
 }
