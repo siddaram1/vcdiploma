@@ -24,7 +24,8 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     JFileChooser jFileChooser1 = new JFileChooser();
     Controller controller = new Controller();
     ImageIcon iconleft;
-    JLabel label1 = new JLabel();    
+    
+    
        
 //------------------------------------------------------------------------------
     public VCListener(VCFrame frame, String oper){
@@ -33,6 +34,7 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     }
 //------------------------------------------------------------------------------
     void buttonOpen_mouseClicked() {
+        JLabel lblorig = new JLabel();
         if (JFileChooser.APPROVE_OPTION == jFileChooser1.showOpenDialog(null)) {
             path = jFileChooser1.getSelectedFile().getPath();
             called = controller.getFileName(path);
@@ -52,11 +54,11 @@ public class VCListener extends MouseAdapter implements  ActionListener{
             frame.check1.setEnabled(false);
             frame.check2.setEnabled(false);
             iconleft = new ImageIcon(path);
-            label1.setIcon(iconleft);
-            frame.original.add(label1);
+            lblorig.setIcon(iconleft);
+            frame.original.add(lblorig);
             frame.original.updateUI();
 
-            label1.addMouseListener(new vcMouseListener(path));
+            lblorig.addMouseListener(new vcMouseListener(path));
         }
   }
 //------------------------------------------------------------------------------
@@ -65,33 +67,35 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     frame.check1.setEnabled(true);
     frame.check2.setEnabled(true);
     if (success==true ) {
-        Toolkit.getDefaultToolkit().beep();
+        Toolkit.getDefaultToolkit().beep();        
     }
   }
 
   void showLayer(int layer){
+      JLabel lblresult = new JLabel();
       if(frame.check1.getState() && frame.check2.getState()){ //both checked
           frame.result1.removeAll();
           frame.result1.updateUI();
           BufferedImage out = controller.decryptImage(); //расшифровать, сохранить и загрузить
           controller.saveImage(out, "decrypt"+called, frame.comboBox.getSelectedIndex());
           iconleft = new ImageIcon("./decrypt"+called+frame.comboBox.getSelectedItem().toString());
-          label1.setIcon(iconleft);
-          frame.result1.add(label1);
+          lblresult.setIcon(iconleft);
+          frame.result1.add(lblresult);
           frame.result1.updateUI();
+          lblresult.addMouseListener(new vcMouseListener("./decrypt"+called+frame.comboBox.getSelectedItem().toString()));
       }else{
         if ((layer == 1)&&(frame.check1.getState())){ //1-st checked
           iconleft = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
-          label1.setIcon(iconleft);
-          frame.result1.add(label1);
+          lblresult.setIcon(iconleft);
+          frame.result1.add(lblresult);
           frame.result1.updateUI();
         }else if ((layer == 1)&&(!frame.check1.getState())){ //1-st unchecked
                 if(frame.check2.getState()){ //2-nd checked
                     frame.result1.removeAll();
                     frame.result1.updateUI();
                     iconleft = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
-                    label1.setIcon(iconleft);
-                    frame.result1.add(label1);
+                    lblresult.setIcon(iconleft);
+                    frame.result1.add(lblresult);
                     frame.result1.updateUI();
                 }else{
                     frame.result1.removeAll();
@@ -100,24 +104,23 @@ public class VCListener extends MouseAdapter implements  ActionListener{
         }
         if ((layer == 2)&&(frame.check2.getState())){ //2-nd checked
           iconleft = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
-          label1.setIcon(iconleft);
-          frame.result1.add(label1);
+          lblresult.setIcon(iconleft);
+          frame.result1.add(lblresult);
           frame.result1.updateUI();
         }else if ((layer == 2)&&(!frame.check2.getState())){ //2-nd unchecked
                 if (frame.check1.getState()){ // 1-st checked
                     frame.result1.removeAll();
                     frame.result1.updateUI();
                     iconleft = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
-                    label1.setIcon(iconleft);
-                    frame.result1.add(label1);
+                    lblresult.setIcon(iconleft);
+                    frame.result1.add(lblresult);
                     frame.result1.updateUI();
                 }else{
                     frame.result1.removeAll();
                     frame.result1.updateUI();
             }
         }
-      }
-
+      }      
   }
 //------------------------------------------------------------------------------
   public void mouseClicked(MouseEvent e) {
@@ -132,7 +135,7 @@ public class VCListener extends MouseAdapter implements  ActionListener{
         showLayer(2);
       }
   }
-
+//------------------------------------------------------------------------------
     public void actionPerformed(ActionEvent e) {
 
     if( oper.equals( "open" ) ) {

@@ -2,7 +2,8 @@ package vc.ui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,7 @@ public class BigImage extends JFrame{
     private void getImagePanel(String imageurl, Dimension size){
         this.setTitle("Изображение в оригинальную величину");
         JPanel panel = new JPanel();
+        
         panel.setBounds(100,100,(int)size.getWidth(),(int)size.getHeight());
         JLabel label = new JLabel();
         ImageIcon icon = new ImageIcon(imageurl);

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import vc.listener.vcMouseListener;
 
 /**
  *
@@ -40,15 +40,17 @@ public class UserInterface implements IUserInterfase{
 //------------------------------------------------------------------------------
     public void setEncImage(String  pathleft, String pathright){
         ImageIcon iconleft = new ImageIcon(pathleft);
-        JLabel label1 = new JLabel();
-        label1.setIcon(iconleft);
-        frame.encleft.add(label1);
+        JLabel lblencleft = new JLabel();
+        lblencleft.addMouseListener(new vcMouseListener(pathleft));
+        lblencleft.setIcon(iconleft);
+        frame.encleft.add(lblencleft);
         frame.encleft.updateUI();
 
         ImageIcon iconright = new ImageIcon(pathright);
-        JLabel label2 = new JLabel();
-        label2.setIcon(iconright);
-        frame.encright.add(label2);
+        JLabel lblencright = new JLabel();
+        lblencright.addMouseListener(new vcMouseListener(pathright));
+        lblencright.setIcon(iconright);
+        frame.encright.add(lblencright);
         frame.encright.updateUI();
     }
 
