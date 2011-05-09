@@ -160,7 +160,7 @@ public class VCAPI {
   public boolean Encrypt(String load, String name, int type) {
      boolean valid = false;
      BufferedImage input;
-     //BufferedImage[] enc = new BufferedImage[2];
+
      input =loadImage(load);
      valid = validateImage(input);
      if (valid==true) {

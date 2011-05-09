@@ -31,6 +31,7 @@ public class VCFrame extends JFrame{
      public TextField textField;
      public java.awt.Checkbox check1 = new java.awt.Checkbox();
      public java.awt.Checkbox check2 = new java.awt.Checkbox();
+     public JButton buttonProcess;
 //------------------------------------------------------------------------------
   //Construct the frame
   public VCFrame() {
@@ -66,7 +67,12 @@ public class VCFrame extends JFrame{
     JPanel contentPane = new JPanel();
     JLabel name = new JLabel();
     JButton buttonOpen = new JButton();
-    JButton buttonProcess = new JButton();
+
+    JLabel torig = new JLabel();
+    JLabel tenc = new JLabel();
+    JLabel tsave = new JLabel();
+
+    buttonProcess = new JButton();
 
     file.add(openfile);
     file.add(savefile);
@@ -89,31 +95,48 @@ public class VCFrame extends JFrame{
     setBounds(0,0,screenSize.width, screenSize.height);    
     this.setTitle("== Visual Cryptography ==");
 
-    buttonOpen.setBounds(new Rectangle(10, 6, 120, 60));
+    buttonOpen.setBounds(new Rectangle(10, 6, 100, 40));
     buttonOpen.setText("Открыть");
     buttonOpen.setToolTipText("Загрузить изображение");
     buttonOpen.setBorderPainted(true);
     buttonOpen.setRolloverEnabled(true);    
     buttonOpen.addMouseListener(new VCListener(this,"open"));
 
-    buttonProcess.setBounds(new Rectangle(130, 6, 120, 60));
+    buttonProcess.setBounds(new Rectangle(130, 6, 100, 40));
     buttonProcess.setText("Шифровать");
     buttonProcess.setToolTipText("Сгенерировать изображния");
     buttonProcess.setBorderPainted(true);
     buttonProcess.addMouseListener(new VCListener(this, "process"));
+    buttonProcess.setEnabled(false);
 
     this.setMenuBar(menu);
 
+    torig.setText("Оригинальное изображение");
+    torig.setBounds(new Rectangle(10, 13, 200, 100));
+
     original.setBounds(new Rectangle(10, 70, 200, 200));
     //original.addComponentListener(new VCListener(this, "origclick"));
-    encleft.setBounds(new Rectangle(10, 280, 200, 200));
-    encright.setBounds(new Rectangle(220, 280, 200, 200));
+
+    tsave.setText("Шифровать как:");
+    tsave.setBounds(new Rectangle(270, 6, 200, 30));
+
+    comboBox.setBounds(new Rectangle(380, 6, 74, 34));
+    comboBox.insertItemAt(".png",0);
+    comboBox.insertItemAt(".gif",1);
+    comboBox.setSelectedIndex(0);
+    //comboBox.setVisible(false);
+
+    tenc.setText("Шифрованные изображения");
+    tenc.setBounds(new Rectangle(10, 240, 200, 100));
+
+    encleft.setBounds(new Rectangle(10, 300, 200, 200));
+    encright.setBounds(new Rectangle(220, 300, 200, 200));
 
     result1.setBounds(new Rectangle(10, 510, 200, 200));
     result1.setOpaque(true);
 
     textField = new TextField();
-    textField.setBounds(new Rectangle(350,6,500,30));
+    textField.setBounds(new Rectangle(500,6,500,30));
     textField.setFont(new Font("sansserif", Font.BOLD, 14));
     textField.setEnabled(false);
 
@@ -126,23 +149,21 @@ public class VCFrame extends JFrame{
     check2.setLabel("Слой 2");
     check2.addMouseListener(new VCListener(this, "check2"));
     check2.setEnabled(false);
-
-    contentPane.add(comboBox, null);
-    contentPane.add(textField, null);
+    
     contentPane.add(buttonOpen, null);
     contentPane.add(buttonProcess, null);
+    contentPane.add(tsave, null);
+    contentPane.add(comboBox, null);
+    contentPane.add(textField, null);
+    contentPane.add(torig, null);
     contentPane.add(original, null);
+    contentPane.add(tenc, null);
     contentPane.add(encleft, null);
     contentPane.add(encright, null);
     contentPane.add(result1, null);
     contentPane.add(check1, null);
     contentPane.add(check2, null);
 
-    comboBox.setBounds(new Rectangle(270, 6, 74, 34));
-    comboBox.insertItemAt(".png",0);
-    comboBox.insertItemAt(".gif",1);
-    comboBox.setSelectedIndex(0);
-    //comboBox.setVisible(false);
   }
   //Overridden so we can exit when window is closed
   protected void processWindowEvent(WindowEvent e) {
