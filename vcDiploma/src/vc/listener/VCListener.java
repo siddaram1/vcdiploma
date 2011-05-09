@@ -23,7 +23,7 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     VCFrame frame;
     JFileChooser jFileChooser1 = new JFileChooser();
     Controller controller = new Controller();
-    ImageIcon iconleft;
+    ImageIcon icon;
     
     
        
@@ -53,8 +53,9 @@ public class VCListener extends MouseAdapter implements  ActionListener{
             frame.check2.setState(false);
             frame.check1.setEnabled(false);
             frame.check2.setEnabled(false);
-            iconleft = new ImageIcon(path);
-            lblorig.setIcon(iconleft);
+            icon = new ImageIcon(path);
+
+            lblorig.setIcon(controller.scale(icon.getImage(), frame));
             frame.original.add(lblorig);
             frame.original.updateUI();
 
@@ -78,23 +79,23 @@ public class VCListener extends MouseAdapter implements  ActionListener{
           frame.result1.updateUI();
           BufferedImage out = controller.decryptImage(); //расшифровать, сохранить и загрузить
           controller.saveImage(out, "decrypt"+called, frame.comboBox.getSelectedIndex());
-          iconleft = new ImageIcon("./decrypt"+called+frame.comboBox.getSelectedItem().toString());
-          lblresult.setIcon(iconleft);
+          icon = new ImageIcon("./decrypt"+called+frame.comboBox.getSelectedItem().toString());
+          lblresult.setIcon(controller.scale(icon.getImage(), frame));
           frame.result1.add(lblresult);
           frame.result1.updateUI();
           lblresult.addMouseListener(new vcMouseListener("./decrypt"+called+frame.comboBox.getSelectedItem().toString()));
       }else{
         if ((layer == 1)&&(frame.check1.getState())){ //1-st checked
-          iconleft = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
-          lblresult.setIcon(iconleft);
+          icon = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
+          lblresult.setIcon(icon);
           frame.result1.add(lblresult);
           frame.result1.updateUI();
         }else if ((layer == 1)&&(!frame.check1.getState())){ //1-st unchecked
                 if(frame.check2.getState()){ //2-nd checked
                     frame.result1.removeAll();
                     frame.result1.updateUI();
-                    iconleft = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
-                    lblresult.setIcon(iconleft);
+                    icon = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
+                    lblresult.setIcon(icon);
                     frame.result1.add(lblresult);
                     frame.result1.updateUI();
                 }else{
@@ -103,16 +104,16 @@ public class VCListener extends MouseAdapter implements  ActionListener{
                 }
         }
         if ((layer == 2)&&(frame.check2.getState())){ //2-nd checked
-          iconleft = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
-          lblresult.setIcon(iconleft);
+          icon = new ImageIcon("./"+called+"_2"+ frame.comboBox.getSelectedItem().toString());
+          lblresult.setIcon(icon);
           frame.result1.add(lblresult);
           frame.result1.updateUI();
         }else if ((layer == 2)&&(!frame.check2.getState())){ //2-nd unchecked
                 if (frame.check1.getState()){ // 1-st checked
                     frame.result1.removeAll();
                     frame.result1.updateUI();
-                    iconleft = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
-                    lblresult.setIcon(iconleft);
+                    icon = new ImageIcon("./"+called+"_1"+ frame.comboBox.getSelectedItem().toString());
+                    lblresult.setIcon(icon);
                     frame.result1.add(lblresult);
                     frame.result1.updateUI();
                 }else{

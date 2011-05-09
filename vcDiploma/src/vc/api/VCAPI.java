@@ -2,11 +2,15 @@ package vc.api;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import vc.controller.Controller;
+import vc.ui.VCFrame;
 
 /**
  *
@@ -156,7 +160,7 @@ public class VCAPI {
   public boolean Encrypt(String load, String name, int type) {
      boolean valid = false;
      BufferedImage input;
-
+     //BufferedImage[] enc = new BufferedImage[2];
      input =loadImage(load);
      valid = validateImage(input);
      if (valid==true) {
@@ -205,11 +209,22 @@ public class VCAPI {
     }
        return out;
    }
-
+//------------------------------------------------------------------------------
    public Dimension getFileSize(String path){
        BufferedImage bi = loadImage(path);
        Dimension size = new Dimension();
        size.setSize(bi.getWidth(), bi.getHeight());
        return size;
    }
+//------------------------------------------------------------------------------
+   public ImageIcon scale(Image src, VCFrame frame) {
+        int w = 200;
+        int h = 200;
+        int type = BufferedImage.TYPE_INT_RGB;
+        BufferedImage dst = new BufferedImage(w, h, type);
+        Graphics2D g2 = dst.createGraphics();
+        g2.drawImage(src, 0, 0, w, h, frame);
+        g2.dispose();
+        return new ImageIcon(dst);
+    }
 }

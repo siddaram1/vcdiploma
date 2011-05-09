@@ -1,7 +1,10 @@
 package vc.controller;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import vc.ui.VCFrame;
 
 /**
  *
@@ -16,4 +19,5 @@ public interface IController {
     public BufferedImage loadImage(String filename);
     public BufferedImage decryptImage();
     public Dimension getFileSize(String path);
+    public ImageIcon scale(Image src, VCFrame frame);
 }

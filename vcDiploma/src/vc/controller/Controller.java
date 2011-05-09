@@ -1,7 +1,9 @@
 package vc.controller;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import vc.api.VCAPI;
 import vc.ui.UserInterface;
 import vc.ui.VCFrame;
@@ -49,6 +51,10 @@ public final class Controller implements IController{
 
     public Dimension getFileSize(String path) {
         return api.getFileSize(path);
+    }
+
+    public ImageIcon scale(Image src, VCFrame frame) {
+        return api.scale(src, frame);
     }
 
 }
