@@ -1,7 +1,5 @@
 package vc.listener;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import vc.controller.Controller;
+import vc.ui.UserInterface;
 import vc.ui.VCFrame;
 
 /**
@@ -149,8 +145,9 @@ public class VCListener extends MouseAdapter implements  ActionListener{
 
     if( oper.equals( "open" ) ) {
       buttonOpen_mouseClicked();
-    }
-    else if( oper.equals( "exit" ) ) {
+    }else if( oper.equals( "openenc" ) ) {
+        UserInterface.getOpenEncFrame();
+    }else if( oper.equals( "exit" ) ) {
       System.exit(0);
     }
     else if( oper.equals( "save" ) ) {
@@ -160,7 +157,7 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
     chooser.setAcceptAllFileFilterUsed(false);
-    //
+    
     if (chooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
       String path = chooser.getSelectedFile().toString();
       BufferedImage bi1  = controller.loadImage("./"+called+"_1"+frame.comboBox.getSelectedItem().toString());
@@ -176,35 +173,8 @@ public class VCListener extends MouseAdapter implements  ActionListener{
     }
     else if( oper.equals( "about" ) ) {
       Controller contr = new Controller();
-      getAboutFrame("./info.png",contr.getFileSize("./info.png"));
+      UserInterface.getAboutFrame("./info.png",contr.getFileSize("./info.png"));
     }
     }
 //------------------------------------------------------------------------------
-    private void getAboutFrame(String imageurl, Dimension size){
-        JFrame frame = new JFrame();
-        frame.setTitle("О программе");
-        frame.setBounds(0,0,500,380);
-        frame.setResizable(false);
-        JPanel panel = new JPanel();
-
-        panel.setBounds(100,100,(int)size.getWidth(),(int)size.getHeight());
-        JLabel label = new JLabel();
-        ImageIcon icon = new ImageIcon(imageurl);
-        label.setIcon(icon);
-        panel = (JPanel) frame.getContentPane();
-        panel.setLayout(new FlowLayout());
-        panel.add(label);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = frame.getSize();
-        if (frameSize.height > screenSize.height) {
-            frameSize.height = screenSize.height;
-        }
-        if (frameSize.width > screenSize.width) {
-            frameSize.width = screenSize.width;
-        }
-        frame.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
-        frame.setVisible(true);
-        frame.validate();
-        panel.updateUI();
-    }
 }

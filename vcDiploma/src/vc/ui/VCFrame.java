@@ -51,6 +51,9 @@ public class VCFrame extends JFrame{
     MenuItem openfile = new MenuItem("Открыть");
     openfile.addActionListener(new VCListener(this, "open"));
 
+    MenuItem openenc = new MenuItem("Открыть шифрованные");
+    openenc.addActionListener(new VCListener(this, "openenc"));
+
     MenuItem savefile = new MenuItem("Сохранить");
     savefile.addActionListener(new VCListener(this, "save"));
 
@@ -75,6 +78,8 @@ public class VCFrame extends JFrame{
     buttonProcess = new JButton();
 
     file.add(openfile);
+    file.add(openenc);
+    file.add(savefile);
     file.add(savefile);
     file.add(exit);
 
